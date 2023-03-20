@@ -43,8 +43,16 @@ stages {
     stage('End') {
             steps {
                 echo 'Build is finished'
-       
+                
             }
         }  
+    }
+           
+ post
+    {
+        always
+              {
+                  slackSend channel: 'jenkins', message: "please find status of pipeline ${env.JOB_NAME} ${env.BUILD_NUMBER} ${env.BUILD_URL}"
+        }
     }
 }
